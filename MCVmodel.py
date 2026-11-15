@@ -7,8 +7,9 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("Pre-Revenue Milestone Valuation Model")
-st.markdown("Real-options and narrative-adjusted fair value calculator for non-operational companies.")
+st.title("Milestone Contingent Valuation Model (MCV)")
+st.write("Designed by Jeff Diamond. SNHU class of 2027. November 2026. This app is free to use." 
+st.markdown("Real-options and narrative-adjusted fair value calculator for pre-revenue companies and startups.")
 
 # --- SIDEBAR INPUTS ---
 st.sidebar.header("Model Inputs")
