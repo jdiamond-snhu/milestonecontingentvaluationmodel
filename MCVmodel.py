@@ -120,7 +120,7 @@ with st.sidebar.expander("Baseline & Dilution Parameters", expanded=False):
     )
     hurdle_rate_pct = st.number_input(
         "Cost of Equity Hurdle Rate r (%)",
-        min_value=0.0,
+        min_value=5.0,
         value=5.0,
         step=1.0,
         format="%.1f",
