@@ -119,15 +119,14 @@ with st.sidebar.expander("Baseline & Dilution Parameters", expanded=False):
     )
     hurdle_rate_pct = st.number_input(
         "Cost of Equity Hurdle Rate r (%)",
-        min_value=0.0,
-        value=18.0,
+        min_value=10.0,
+        value=0.0,
         step=1.0,
         format="%.1f",
-        help="""Your required annual return (%) to compensate for taking on speculative risk while waiting for the milestone.
-
-- **10% – 12%:** Established, steady businesses
-- **15% – 20%:** Speculative pre-revenue stocks (e.g., Virgin Galactic, biotechs)
-- **25%+:** Ultra-high-risk startups near cash exhaustion"""
+        help="""Your required annual return (%) to compensate for taking on speculative risk while waiting for the milestone. Typical % values are as follows:
+- **10% – 12%:** Established, stable businesses that have a new milestone or new product they are working on.
+- **15% – 20%:** Speculative pre-revenue companies such as emerging tech, aviation/aerospace, biotechs, etc.)
+- **25%+:** Ultra-high-risk startups always near cash exhaustion."""
     )
     years_t = st.number_input(
         "Time to Milestone (Years, t)",
