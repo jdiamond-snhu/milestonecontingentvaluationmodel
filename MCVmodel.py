@@ -19,7 +19,7 @@ ticker_symbol = st.sidebar.text_input(
     "Stock Ticker Symbol",
     value="",
     placeholder="e.g., SPCE, RKLB, CRSP",
-    help="Enter any publicly traded stock symbol to auto-fetch its latest price and balance sheet data."
+    
 ).upper().strip()
 
 # Initialize defaults before a ticker is entered
@@ -52,7 +52,7 @@ last_price = st.sidebar.number_input(
     value=fetched_price,
     step=0.01,
     format="%.2f",
-    help="Auto-populates with the stock's most recent closing price. You can manually override this to test 'what-if' entry prices."
+    
 )
 
 # 3. % Value for Chance of Milestone Being Achieved
@@ -62,18 +62,18 @@ p_success_pct = st.sidebar.slider(
     max_value=100,
     value=50,
     step=1,
-    help="Your estimated probability (0% to 100%) that the company successfully completes its next key milestone on schedule."
+    help="Your estimate (0% to 100%) that the company will achieve its next key milestone on schedule."
 )
 p_success = p_success_pct / 100.0
 
-# 4. Assumed Price Target if Milestone is Achieved (Narrative Option Value)
+# 4. Your Assumed Price Target if the Milestone is Achieved (Narrative Option Value)
 narrative_target = st.sidebar.number_input(
     "Assumed Price Target if Achieved ($)",
     min_value=0.00,
     value=0.00,
     step=0.50,
     format="%.2f",
-    help="The share price you expect the market to reward the stock with immediately upon hitting the milestone (captures the hype/narrative re-rating)."
+    
 )
 
 # Supporting Model Parameters with '?' hover tooltips
