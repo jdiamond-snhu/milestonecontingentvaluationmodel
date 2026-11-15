@@ -114,9 +114,9 @@ with st.sidebar.expander("Baseline & Dilution Parameters", expanded=False):
         step=1.0,
         format="%.1f",
         help="""Your required annual return (%) to compensate for taking on speculative risk while waiting for the milestone. Typical % values are as follows:
-- **10% – 12%:** Established, steady businesses that are stable, but have a new milestone or new product they are working on.
-- **15% – 20%:** Speculative pre-revenue companies such as emerging tech, aviation/aerospace, A.I., biotechs, etc.)
-- **25%+:** Ultra-high-risk startups always near cash exhaustion. Examples might include SPACs and other such high-risk ventures."""
+- **10% – 12%:** Established, steady businesses that are stable and have a new milestone or new product they are working on.
+- **15% – 20%:** Speculative pre-revenue companies such as emerging tech, aviation/aerospace, biotechs, etc.)
+- **25%+:** Ultra-high-risk startups always near cash exhaustion."""
     )
 
     years_t = st.number_input(
