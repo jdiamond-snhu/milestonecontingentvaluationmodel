@@ -107,14 +107,19 @@ with st.sidebar.expander("Baseline & Dilution Parameters", expanded=False):
         format="%.2f",
         help="The average stock price at which management sells new shares to raise cash. Lower prices mean printing more shares and heavier dilution."
     )
-    hurdle_rate_pct = st.number_input(
+        hurdle_rate_pct = st.number_input(
         "Cost of Equity Hurdle Rate r (%)",
         min_value=0.0,
         value=18.0,
         step=1.0,
         format="%.1f",
-        help="Your required annual return (%) to compensate for taking on high, speculative risk while waiting for the milestone. Typical values to enter are: • 10% – 12%: Established companies with steady, predictable businesses. But they are working toward achieving a new milestone. • 15% – 20%: Speculative pre-revenue companies (like aerospace, aviation, or most clinical-stage biotechs) where delays and volatility are normal. • 25%+: Ultra-high-risk startups on the edge of running out of cash."
+        help="""Your required annual return (%) to compensate for taking on speculative risk while waiting for the milestone. Typical % values are as follows:
+
+- **10% – 12%:** Established, steady businesses that are stable, but have a new milestone they are woking toward.
+- **15% – 20%:** Speculative pre-revenue companies such as emerging tech, aviation and aerospace, biotechs, etc.)
+- **25%+:** Ultra-high-risk startups always near cash exhaustion."""
     )
+
     years_t = st.number_input(
         "Time to Milestone (Years, t)",
         min_value=0.25,
