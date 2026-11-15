@@ -17,7 +17,6 @@ st.sidebar.header("Model Inputs")
 ticker_symbol = st.sidebar.text_input(
     "Stock Ticker Symbol",
     value="SPCE",
-    help="Enter any publicly traded stock symbol (e.g., SPCE, RKLB, or a clinical-stage biotech ticker) to auto-fetch its latest price and balance sheet data."
 ).upper().strip()
 
 # Fetch live last price and balance sheet data via yfinance
@@ -50,17 +49,17 @@ last_price = st.sidebar.number_input(
     value=fetched_price,
     step=0.01,
     format="%.2f",
-    help="The stock's most recent closing price. You can manually override this to test 'what-if' entry prices."
+    
 )
 
 # 3. % Value for Chance of Milestone Being Achieved
 p_success_pct = st.sidebar.slider(
-    "Chance of Milestone Achieved (%)",
+    "Chance of Milestone being Achieved (%)",
     min_value=0,
     max_value=100,
     value=50,
     step=1,
-    help="Your estimated probability (0% to 100%) that the company successfully completes its next key milestone on schedule."
+    
 )
 p_success = p_success_pct / 100.0
 
