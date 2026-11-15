@@ -14,7 +14,11 @@ st.markdown("Real-options and narrative-adjusted fair value calculator for non-o
 st.sidebar.header("Model Inputs")
 
 # 1. Stock Ticker Symbol
-ticker_symbol = st.sidebar.text_input("Stock Ticker Symbol", value="SPCE").upper().strip()
+ticker_symbol = st.sidebar.text_input(
+    "Stock Ticker Symbol",
+    value="SPCE",
+    help="Enter any publicly traded stock symbol (e.g., SPCE, RKLB, or a clinical-stage biotech ticker) to auto-fetch its latest price and balance sheet data."
+).upper().strip()
 
 # Fetch live last price and balance sheet data via yfinance
 fetched_price = 1.84
@@ -45,7 +49,8 @@ last_price = st.sidebar.number_input(
     min_value=0.01,
     value=fetched_price,
     step=0.01,
-    format="%.2f"
+    format="%.2f",
+    help="The stock's most recent closing price. You can manually override this to test 'what-if' entry prices."
 )
 
 # 3. % Value for Chance of Milestone Being Achieved
@@ -54,7 +59,8 @@ p_success_pct = st.sidebar.slider(
     min_value=0,
     max_value=100,
     value=50,
-    step=1
+    step=1,
+    help="Your estimated probability (0% to 100%) that the company successfully completes its next key milestone on schedule."
 )
 p_success = p_success_pct / 100.0
 
@@ -64,17 +70,60 @@ narrative_target = st.sidebar.number_input(
     min_value=0.00,
     value=12.00,
     step=0.50,
-    format="%.2f"
+    format="%.2f",
+    help="The share price you expect the market to reward the stock with immediately upon hitting the milestone (captures the hype/narrative re-rating)."
 )
 
-# Supporting Model Parameters (Expander keeps sidebar clean while allowing full customization)
+# Supporting Model Parameters with '?' hover tooltips
 with st.sidebar.expander("Baseline & Dilution Parameters", expanded=False):
-    nav_0 = st.number_input("Tangible NAV₀ per Share ($)", min_value=0.00, value=fetched_nav, step=0.05, format="%.2f")
-    existing_shares = st.number_input("Existing Shares (Millions)", min_value=0.1, value=fetched_shares, step=1.0, format="%.2f")
-    atm_raise = st.number_input("Planned Capital Raise / Burn ($M)", min_value=0.0, value=250.0, step=10.0, format="%.1f")
-    atm_avg_price = st.number_input("Assumed Raise Share Price ($)", min_value=0.01, value=last_price, step=0.05, format="%.2f")
-    hurdle_rate_pct = st.number_input("Cost of Equity Hurdle Rate r (%)", min_value=0.0, value=18.0, step=1.0, format="%.1f")
-    years_t = st.number_input("Time to Milestone (Years, t)", min_value=0.25, value=1.0, step=0.25, format="%.2f")
+    nav_0 = st.number_input(
+        "Tangible NAV₀ per Share ($)",
+        min_value=0.00,
+        value=fetched_nav,
+        step=0.05,
+        format="%.2f",
+        help="Net Asset Value per share right now (book value minus intangible goodwill). This acts as the liquidation floor if the business stalls."
+    )
+    existing_shares = st.number_input(
+        "Existing Shares (Millions)",
+        min_value=0.1,
+        value=fetched_shares,
+        step=1.0,
+        format="%.2f",
+        help="Total current share count in millions before any new stock is issued."
+    )
+    atm_raise = st.number_input(
+        "Planned Capital Raise / Burn ($M)",
+        min_value=0.0,
+        value=250.0,
+        step=10.0,
+        format="%.1f",
+        help="Total cash (in millions) the company needs to raise via new shares to fund its cash burn if the milestone is delayed."
+    )
+    atm_avg_price = st.number_input(
+        "Assumed Raise Share Price ($)",
+        min_value=0.01,
+        value=last_price,
+        step=0.05,
+        format="%.2f",
+        help="The average stock price at which management sells new shares to raise cash. Lower prices mean printing more shares and heavier dilution."
+    )
+    hurdle_rate_pct = st.number_input(
+        "Cost of Equity Hurdle Rate r (%)",
+        min_value=0.0,
+        value=18.0,
+        step=1.0,
+        format="%.1f",
+        help="Your required annual return (%) to compensate for taking on high, speculative risk while waiting for the milestone."
+    )
+    years_t = st.number_input(
+        "Time to Milestone (Years, t)",
+        min_value=0.25,
+        value=1.0,
+        step=0.25,
+        format="%.2f",
+        help="How many years from today until the milestone is expected to be completed (e.g., 0.5 = 6 months, 1.0 = 1 year)."
+    )
 
 # --- CORE CALCULATIONS ---
 hurdle_rate = hurdle_rate_pct / 100.0
