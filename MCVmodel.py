@@ -101,7 +101,7 @@ with st.sidebar.expander("Baseline & Dilution Parameters", expanded=False):
         "Planned Capital Raise / Burn ($M)",
         min_value=0.0,
         value=0.0,
-        step=10.0,
+        step=1.0,
         format="%.1f",
         help="""Total cash (in millions) the company needs to raise via new shares to fund its cash burn if the milestone is delayed.
 
