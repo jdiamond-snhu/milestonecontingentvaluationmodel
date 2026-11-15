@@ -114,7 +114,10 @@ with st.sidebar.expander("Baseline & Dilution Parameters", expanded=False):
         value=18.0,
         step=1.0,
         format="%.1f",
-        help="Your required annual return (%) to compensate for taking on high, speculative risk while waiting for the milestone."
+        help="Your required annual return (%) to compensate for taking on high, speculative risk while waiting for the milestone. Typical values to enter are:
+        • 10% – 12%: Established companies with steady, predictable businesses. But they are working toward achieving a new milestone.
+        • 15% – 20%: Speculative pre-revenue companies (like aerospace, aviation, or most clinical-stage biotechs) where delays and volatility are normal.
+        • 25%+: Ultra-high-risk startups on the edge of running out of cash."
     )
     years_t = st.number_input(
         "Time to Milestone (Years, t)",
