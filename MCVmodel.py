@@ -8,8 +8,8 @@ st.set_page_config(
 )
 
 st.title("Milestone Contingent Valuation Model (MCV)")
-st.write("Designed by Jeff Diamond. SNHU Finance class of 2027. November 2026. This app is free to use.") 
-st.write("Real-options and narrative-adjusted fair value calculator for established companies, and pre-revenue and startups.")
+st.caption("Designed by Jeff Diamond. SNHU Finance class of 2027. November 2026. This app is free to use.") 
+st.write("Real-options and narrative-adjusted fair value calculator for established companies, pre-revenue, and startups.")
 st.divider()
 # --- SIDEBAR INPUTS ---
 st.sidebar.header("Model Inputs")
