@@ -8,7 +8,7 @@ st.set_page_config(
 )
 
 st.title("Milestone Contingent Valuation Model (MCV)")
-st.caption("Formula copyright and app designed by Jeff Diamond. SNHU Finance class of 2027. Published November 2026. This app is free to use.") 
+st.caption("MCV formula copyright and app designed by Jeff Diamond. SNHU Finance class of 2027. Published November 2026. This app is free to use.") 
 st.write("Real-options and narrative-adjusted fair value calculator for established companies, pre-revenue, and startups.")
 st.divider()
 # --- SIDEBAR INPUTS ---
