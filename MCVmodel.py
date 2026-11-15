@@ -107,7 +107,7 @@ with st.sidebar.expander("Baseline & Dilution Parameters", expanded=False):
         format="%.2f",
         help="The average stock price at which management sells new shares to raise cash. Lower prices mean printing more shares and heavier dilution."
     )
-        hurdle_rate_pct = st.number_input(
+    hurdle_rate_pct = st.number_input(
         "Cost of Equity Hurdle Rate r (%)",
         min_value=0.0,
         value=18.0,
