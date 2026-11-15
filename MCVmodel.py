@@ -7,7 +7,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("Pre-Revenue Milestone Valuation Model")
+st.title("Milestone Contingent Valuation Model (MCV)")
 st.markdown("Real-options and narrative-adjusted fair value calculator for non-operational companies.")
 
 # --- SIDEBAR INPUTS ---
