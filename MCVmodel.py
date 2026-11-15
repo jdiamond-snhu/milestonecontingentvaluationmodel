@@ -57,7 +57,7 @@ last_price = st.sidebar.number_input(
 
 # 3. % Value for Chance of Milestone Being Achieved
 p_success_pct = st.sidebar.slider(
-    "Your Projected % Chance Milestone is Achieved",
+    "Projected % Chance Milestone is Achieved",
     min_value=0,
     max_value=100,
     value=50,
