@@ -8,8 +8,8 @@ st.set_page_config(
 )
 
 st.title("Milestone Contingent Valuation Model (MCV)")
-st.subheader("tes")
-st.write("Fair value calculator for pre-revenue and emerging tech companies.")
+st.write("MCV formula and app by Jeff Diamond, SNHU Finance, Class of 2027. Published November, 2026.")
+st.subheader("Fair value prediction calculator for pre-revenue, emerging tech, and undervalued companies.")
 
 # Pull Tiingo API token securely from Streamlit Secrets
 API_KEY = st.secrets["TIINGO_API_KEY"]
