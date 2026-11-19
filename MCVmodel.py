@@ -89,7 +89,7 @@ p_success_pct = st.sidebar.slider(
     "% Chance Milestone is Achieved",
     min_value=0,
     max_value=100,
-    value=50,
+    value=100,
     step=1,
     help="Your estimate (0% to 100%) that the company will achieve its next key milestone on schedule."
 )
