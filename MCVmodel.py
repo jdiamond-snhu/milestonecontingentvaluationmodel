@@ -1,5 +1,4 @@
 import requests
-import yfinance as yf
 import streamlit as st
 
 @st.cache_data(ttl=60)  # Refreshes every 60 seconds
