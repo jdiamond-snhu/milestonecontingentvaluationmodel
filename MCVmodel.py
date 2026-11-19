@@ -1,6 +1,5 @@
 import streamlit as st
-import yfinance as yf
-api_key = st.secrets[a264adde1a6f8912723bc2a0923da2d9e82d1fef]
+api_key = st.secrets["a264adde1a6f8912723bc2a0923da2d9e82d1fef"]
 # Page configuration
 st.set_page_config(
     page_title="Pre-Revenue Milestone Valuation Calculator",
