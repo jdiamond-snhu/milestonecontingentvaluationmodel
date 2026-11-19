@@ -1,7 +1,7 @@
-from datetime import datetime, timedelta
-import requests
 import streamlit as st
+import requests
 
+# Pull Tiingo API token securely from Streamlit Secrets
 API_KEY = st.secrets["TIINGO_API_KEY"]
 
 @st.cache_data(ttl=300)
@@ -10,9 +10,29 @@ def fetch_tiingo_quote(symbol: str):
         "Content-Type": "application/json",
         "Authorization": f"Token {API_KEY}"
     }
-    clean_sym = symbol.lower().strip()
+    
+    # 1. Try Tiingo's live/intraday IEX endpoint first (works for any ticker)
+    iex_url = f"https://api.tiingo.com/iex/tiingo/daily/{symbol.lower()}"
+    iex_resp = requests.get(iex_url, headers=headers, timeout=10)
+    if iex_resp.status_code == 200:
+        iex_data = iex_resp.json()
+        if isinstance(iex_data, list) and len(iex_data) > 0:
+            quote = iex_data
+            price = quote.get("tngoLast") or quote.get("last") or quote.get("prevClose")
+            if price is not None:
+                return float(price)
 
-   # 1. Stock Ticker Symbol (Blank by default)
+    # 2. Fallback to End-of-Day endpoint (also works for any ticker)
+    eod_url = f"https://api.tiingo.com/iex/tiingo/daily/{symbol.lower()}/prices"
+    eod_resp = requests.get(eod_url, headers=headers, timeout=10)
+    if eod_resp.status_code == 200:
+        eod_data = eod_resp.json()
+        if isinstance(eod_data, list) and len(eod_data) > 0:
+            return float(eod_data[-1]["close"])
+
+    return None
+
+# 1. Stock Ticker Symbol (Blank by default)
 ticker_symbol = st.sidebar.text_input(
     "Stock Ticker Symbol",
     value="",
@@ -25,17 +45,15 @@ fetched_nav = 0.00
 fetched_shares = 100.00  # in millions
 
 if ticker_symbol:
-    st.sidebar.write("Debug price:", fetch_tiingo_quote(ticker_symbol))
     try:
+        # Tiingo uses hyphens for share classes (e.g., BRK-B instead of BRK.B)
         clean_symbol = ticker_symbol.replace(".", "-")
         live_price = fetch_tiingo_quote(clean_symbol)
-    try:
-        clean_symbol = ticker_symbol.replace(".", "-")
-        live_price = fetch_tiingo_quote(clean_symbol)
-    if live_price and live_price > 0:
+        
+        if live_price and live_price > 0:
             fetched_price = round(live_price, 2)
         else:
-            st.sidebar.caption("⚠️ Could not fetch price for that ticker; enter values manually below.")
+            st.sidebar.caption("⚠️ Could not fetch live price for that ticker; enter values manually below.")
     except Exception as e:
         st.sidebar.caption(f"⚠️ Error fetching data: {e}")
 
