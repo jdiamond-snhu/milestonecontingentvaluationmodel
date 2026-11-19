@@ -1,32 +1,35 @@
 import requests
 import streamlit as st
 
-@st.cache_data(ttl=60)
-def get_live_price(ticker: str):
+@st.cache_data(ttl=300)
+def fetch_tiingo_quote(symbol: str):
     api_key = st.secrets["TIINGO_API_KEY"]
-    url = f"https://tiingo.com{ticker.lower()}"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Token {api_key}"
     }
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200 and response.json():
-        quote = response.json()
-        return quote.get("tngoLast") or quote.get("last") or quote.get("prevClose")
+    
+    # 1. Try Tiingo's live/intraday IEX endpoint first
+    iex_url = f"https://tiingo.com{symbol.lower()}"
+    iex_resp = requests.get(iex_url, headers=headers, timeout=10)
+    if iex_resp.status_code == 200:
+        iex_data = iex_resp.json()
+        if isinstance(iex_data, list) and len(iex_data) > 0:
+            quote = iex_data
+            price = quote.get("tngoLast") or quote.get("last") or quote.get("prevClose")
+            if price is not None:
+                return float(price)
+
+    # 2. Fallback to End-of-Day endpoint
+    eod_url = f"https://tiingo.com{symbol.lower()}/prices"
+    eod_resp = requests.get(eod_url, headers=headers, timeout=10)
+    if eod_resp.status_code == 200:
+        eod_data = eod_resp.json()
+        if isinstance(eod_data, list) and len(eod_data) > 0:
+            return float(eod_data[-1]["close"])
+
     return None
 
-# Page configuration
-st.set_page_config(
-    page_title="Pre-Revenue Milestone Valuation Calculator",
-    layout="wide"
-)
-
-st.title("Milestone Contingent Valuation Model (MCV)")
-st.caption("MCV formula copyright and app designed by Jeff Diamond. SNHU Finance class of 2027. Published November 2026. This app is free to use.") 
-st.write("Real-options and narrative-adjusted fair value calculator for established companies, pre-revenue, and startups.")
-st.divider()
-# --- SIDEBAR INPUTS ---
-st.sidebar.header("Model Inputs")
 
 # 1. Stock Ticker Symbol (Blank by default)
 ticker_symbol = st.sidebar.text_input(
@@ -42,7 +45,6 @@ fetched_shares = 100.00  # in millions
 
 if ticker_symbol:
     try:
-        # Tiingo uses hyphens for share classes (e.g., BRK-B instead of BRK.B)
         clean_symbol = ticker_symbol.replace(".", "-")
         live_price = fetch_tiingo_quote(clean_symbol)
         
@@ -50,11 +52,8 @@ if ticker_symbol:
             fetched_price = round(live_price, 2)
         else:
             st.sidebar.caption("⚠️ Could not fetch live price for that ticker; enter values manually below.")
-            
-        # Note: Book value & shares outstanding require Tiingo's paid Fundamentals add-on,
-        # so fetched_nav and fetched_shares stay at their defaults for manual input.
-    except Exception:
-        st.sidebar.caption("⚠️ Could not fetch live data for that ticker; enter values manually below.")
+    except Exception as e:
+        st.sidebar.error(f"Error: {e}")
 
 # 2. Last Price of the Stock (Auto-populated once ticker is entered)
 last_price = st.sidebar.number_input(
