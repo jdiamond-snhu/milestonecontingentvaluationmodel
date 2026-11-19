@@ -3,6 +3,7 @@ import requests
 import streamlit as st
 
 @st.cache_data(ttl=300)
+API_KEY = st.secrets["TIINGO_API_KEY"]
 def fetch_tiingo_quote(symbol: str):
     headers = {
         "Content-Type": "application/json",
