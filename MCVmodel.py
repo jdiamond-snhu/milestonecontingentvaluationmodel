@@ -1,5 +1,5 @@
 import streamlit as st
-api_key = st.secrets["a264adde1a6f8912723bc2a0923da2d9e82d1fef"]
+api_key = st.secrets["TIINGO_API_KEY"]
 # Page configuration
 st.set_page_config(
     page_title="Pre-Revenue Milestone Valuation Calculator",
