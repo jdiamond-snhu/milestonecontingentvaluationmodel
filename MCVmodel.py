@@ -10,16 +10,23 @@ def fetch_tiingo_quote(symbol: str):
         "Content-Type": "application/json",
         "Authorization": f"Token {API_KEY}"
     }
-    
-    # 1. Try Tiingo's live/intraday IEX endpoint first (works for any ticker)
-    iex_url = f"https://api.tiingo.com/iex/{symbol.lower()}"
+    clean_sym = symbol.lower().strip()
+    base = "https://" + "api." + "tiingo.com"
+
+    # 1. Live / Intraday IEX Endpoint
+    iex_url = f"{base}/iex/{clean_sym}"
     iex_resp = requests.get(iex_url, headers=headers, timeout=10)
     if iex_resp.status_code == 200:
         iex_data = iex_resp.json()
         if isinstance(iex_data, list) and len(iex_data) > 0:
-            quote = iex_data
-            price = quote.get("tngoLast") or quote.get("last") or quote.get("prevClose")
-            if price is not None:
+            quote = next(iter(iex_data))
+            price = (
+                quote.get("tngoLast")
+                or quote.get("last")
+                or quote.get("prevClose")
+                or quote.get("open")
+            )
+            if price is not None and float(price) > 0:
                 return float(price)
 
     # 2. Fallback to End-of-Day endpoint (also works for any ticker)
