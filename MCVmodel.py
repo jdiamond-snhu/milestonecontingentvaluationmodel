@@ -12,7 +12,7 @@ def fetch_tiingo_quote(symbol: str):
     }
     
     # 1. Try Tiingo's live/intraday IEX endpoint first
-    iex_url = "https://tiingo.com{symbol.lower()}"
+    iex_url = "https://api.tiingo.com/iex/ / /tiingo/daily/{symbol.lower()}"
     iex_resp = requests.get(iex_url, headers=headers, timeout=10)
     if iex_resp.status_code == 200:
         iex_data = iex_resp.json()
@@ -23,7 +23,7 @@ def fetch_tiingo_quote(symbol: str):
                 return float(price)
 
     # 2. Fallback to End-of-Day endpoint (for stocks not actively quoting on IEX)
-    eod_url = "https://tiingo.com{symbol.lower()}/prices"
+    eod_url = "https://api.tiingo.com{symbol.lower()}/prices"
     eod_resp = requests.get(eod_url, headers=headers, timeout=10)
     if eod_resp.status_code == 200:
         eod_data = eod_resp.json()
