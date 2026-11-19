@@ -25,11 +25,11 @@ fetched_nav = 0.00
 fetched_shares = 100.00  # in millions
 
 if ticker_symbol:
+    if ticker_symbol:
+    st.sidebar.write("Debug price:", fetch_tiingo_quote(ticker_symbol))
     try:
         clean_symbol = ticker_symbol.replace(".", "-")
         live_price = fetch_tiingo_quote(clean_symbol)
-        if ticker_symbol:
-    st.sidebar.write("Debug price:", fetch_tiingo_quote(ticker_symbol))
         if live_price and live_price > 0:
             fetched_price = round(live_price, 2)
         else:
