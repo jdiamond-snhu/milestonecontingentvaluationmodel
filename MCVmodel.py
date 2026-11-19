@@ -44,6 +44,12 @@ fetched_nav = 0.00
 fetched_shares = 100.00  # in millions
 
 if ticker_symbol:
+f ticker_symbol:
+    test_resp = requests.get(
+        f"https://tiingo.com{ticker_symbol.lower()}",
+        headers={"Authorization": f"Token {st.secrets['TIINGO_API_KEY']}"}
+    )
+    st.sidebar.write("Status:", test_resp.status_code, "Data:", test_resp.json())
     try:
         clean_symbol = ticker_symbol.replace(".", "-")
         live_price = fetch_tiingo_quote(clean_symbol)
