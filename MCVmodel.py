@@ -30,7 +30,7 @@ if ticker_symbol:
     try:
         clean_symbol = ticker_symbol.replace(".", "-")
         live_price = fetch_tiingo_quote(clean_symbol)
-        if live_price and live_price > 0:
+    if live_price and live_price > 0:
             fetched_price = round(live_price, 2)
         else:
             st.sidebar.caption("⚠️ Could not fetch price for that ticker; enter values manually below.")
