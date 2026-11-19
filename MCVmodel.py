@@ -1,12 +1,14 @@
-import requests
 import streamlit as st
+import requests
+
+# Pull Tiingo API token securely from Streamlit Secrets
+API_KEY = st.secrets["TIINGO_API_KEY"]
 
 @st.cache_data(ttl=300)
 def fetch_tiingo_quote(symbol: str):
-    api_key = st.secrets["TIINGO_API_KEY"]
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Token {api_key}"
+        "Authorization": f"Token {API_KEY}"
     }
     
     # 1. Try Tiingo's live/intraday IEX endpoint first
@@ -20,7 +22,7 @@ def fetch_tiingo_quote(symbol: str):
             if price is not None:
                 return float(price)
 
-    # 2. Fallback to End-of-Day endpoint
+    # 2. Fallback to End-of-Day endpoint (for stocks not actively quoting on IEX)
     eod_url = f"https://tiingo.com{symbol.lower()}/prices"
     eod_resp = requests.get(eod_url, headers=headers, timeout=10)
     if eod_resp.status_code == 200:
@@ -29,7 +31,6 @@ def fetch_tiingo_quote(symbol: str):
             return float(eod_data[-1]["close"])
 
     return None
-
 
 # 1. Stock Ticker Symbol (Blank by default)
 ticker_symbol = st.sidebar.text_input(
@@ -44,13 +45,8 @@ fetched_nav = 0.00
 fetched_shares = 100.00  # in millions
 
 if ticker_symbol:
-f ticker_symbol:
-    test_resp = requests.get(
-        f"https://tiingo.com{ticker_symbol.lower()}",
-        headers={"Authorization": f"Token {st.secrets['TIINGO_API_KEY']}"}
-    )
-    st.sidebar.write("Status:", test_resp.status_code, "Data:", test_resp.json())
     try:
+        # Tiingo uses hyphens for share classes (e.g., BRK-B instead of BRK.B)
         clean_symbol = ticker_symbol.replace(".", "-")
         live_price = fetch_tiingo_quote(clean_symbol)
         
@@ -59,16 +55,16 @@ f ticker_symbol:
         else:
             st.sidebar.caption("⚠️ Could not fetch live price for that ticker; enter values manually below.")
     except Exception as e:
-        st.sidebar.error(f"Error: {e}")
+        st.sidebar.caption(f"⚠️ Error fetching data: {e}")
 
 # 2. Last Price of the Stock (Auto-populated once ticker is entered)
-last_price = st.sidebar.number_input(
-    "Last Stock Price ($)",
+current_price = st.sidebar.number_input(
+    "Last Price of the Stock ($)",
     min_value=0.00,
     value=fetched_price,
     step=0.01,
     format="%.2f",
-    
+    key=f"price_{ticker_symbol}"
 )
 
 # 3. % Value for Chance of Milestone Being Achieved
