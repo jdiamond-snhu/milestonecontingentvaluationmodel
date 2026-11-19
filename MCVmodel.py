@@ -1,5 +1,28 @@
+import requests
 import streamlit as st
-api_key = st.secrets["TIINGO_API_KEY"]
+
+@st.cache_data(ttl=60)  # Refreshes every 60 seconds
+def get_live_price(ticker: str) -> float | None:
+    api_key = st.secrets["TIINGO_API_KEY"]
+    url = f"https://tiingo.com{ticker.lower()}"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Token {api_key}"
+    }
+    
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        st.error(f"Tiingo error {response.status_code}: {response.text}")
+        return None
+        
+    data = response.json()
+    if not data:
+        return None
+        
+    # 'tngoLast' is Tiingo's last traded price (falls back to 'last' or 'prevClose')
+    quote = data[0]
+    return quote.get("tngoLast") or quote.get("last") or quote.get("prevClose")
+
 # Page configuration
 st.set_page_config(
     page_title="Pre-Revenue Milestone Valuation Calculator",
