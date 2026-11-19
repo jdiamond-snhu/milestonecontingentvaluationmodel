@@ -8,7 +8,8 @@ st.set_page_config(
 )
 
 st.title("Milestone Contingent Valuation Model (MCV)")
-st.markdown("Real-options and narrative-adjusted fair value calculator for non-operational companies.")
+
+st.write("Fair value calculator for pre-revenue and emerging tech companies.")
 
 # Pull Tiingo API token securely from Streamlit Secrets
 API_KEY = st.secrets["TIINGO_API_KEY"]
