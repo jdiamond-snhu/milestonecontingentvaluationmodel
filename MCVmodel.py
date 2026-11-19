@@ -86,13 +86,14 @@ p_success_pct = st.sidebar.slider(
 p_success = p_success_pct / 100.0
 
 # 4. Your Assumed Price Target if the Milestone is Achieved (Narrative Option Value)
-narrative_target = st.sidebar.number_input(
-    "Assumed Price Target if Achieved ($)",
+assumed_target = st.sidebar.number_input(
+    "Assumed Price Target ($)",
     min_value=0.00,
-    value=0.00,
-    step=0.50,
+    value=None,
+    step=0.01,
     format="%.2f",
-    
+    placeholder="Enter target price...",
+    key=f"target_{ticker_symbol}"
 )
 
 # Supporting Model Parameters with '?' hover tooltips
