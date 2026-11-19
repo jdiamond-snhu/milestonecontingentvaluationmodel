@@ -1,7 +1,8 @@
 import requests
+import yfinance as yf
 import streamlit as st
 
-@st.cache_data(ttl=60)
+@st.cache_data(ttl=60)  # Refreshes every 60 seconds
 def get_live_price(ticker: str) -> float | None:
     api_key = st.secrets["TIINGO_API_KEY"]
     url = f"https://tiingo.com{ticker.lower()}"
@@ -19,17 +20,10 @@ def get_live_price(ticker: str) -> float | None:
     if not data:
         return None
         
-    quote = data[0]  # Tiingo returns a list of dicts, so grab the first item [0]
+    # 'tngoLast' is Tiingo's last traded price (falls back to 'last' or 'prevClose')
+    quote = data[0]
     return quote.get("tngoLast") or quote.get("last") or quote.get("prevClose")
 
-# --- Make sure you actually CALL the function below! ---
-ticker = st.text_input("Ticker", value="AAPL").strip().upper()
-if ticker:
-    price = get_live_price(ticker)
-    if price:
-        st.metric(f"{ticker} Live Price", f"${price:,.2f}")
-    else:
-        st.warning("No price returned.")
 
 # Page configuration
 st.set_page_config(
