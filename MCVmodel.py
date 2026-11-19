@@ -10,40 +10,39 @@ def fetch_tiingo_quote(symbol: str):
     }
     clean_sym = symbol.lower().strip()
     
-    # 1. Try Tiingo's live/intraday IEX endpoint first (captures intraday + closing bell)
-    iex_url = f"https://tiingo.com{clean_sym}"
-    iex_resp = requests.get(iex_url, headers=headers, timeout=10)
-    if iex_resp.status_code == 200:
-        iex_data = iex_resp.json()
-        if isinstance(iex_data, list) and len(iex_data) > 0:
-            quote = iex_data
-            price = (
-                quote.get("tngoLast")
-                or quote.get("last")
-                or quote.get("prevClose")
-                or quote.get("open")
-            )
-            if price is not None and float(price) > 0:
-                return float(price)
+   # 1. Stock Ticker Symbol (Blank by default)
+ticker_symbol = st.sidebar.text_input(
+    "Stock Ticker Symbol",
+    value="",
+    placeholder="e.g., F, RKLB, CRSP",
+).upper().strip()
 
-    # 2. Fallback: Pull the last 7 days of End-of-Day prices (guarantees latest closing bell)
-    seven_days_ago = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
-    eod_url = f"https://tiingo.com{clean_sym}/prices"
-    eod_resp = requests.get(
-        eod_url,
-        headers=headers,
-        params={"startDate": seven_days_ago},
-        timeout=10
-    )
-    if eod_resp.status_code == 200:
-        eod_data = eod_resp.json()
-        if isinstance(eod_data, list) and len(eod_data) > 0:
-            latest_close = eod_data[-1].get("close")
-            if latest_close is not None and float(latest_close) > 0:
-                return float(latest_close)
+# Initialize defaults before a ticker is entered
+fetched_price = 0.00
+fetched_nav = 0.00
+fetched_shares = 100.00  # in millions
 
-    return None
+if ticker_symbol:
+    try:
+        clean_symbol = ticker_symbol.replace(".", "-")
+        live_price = fetch_tiingo_quote(clean_symbol)
+        
+        if live_price and live_price > 0:
+            fetched_price = round(live_price, 2)
+        else:
+            st.sidebar.caption("⚠️ Could not fetch price for that ticker; enter values manually below.")
+    except Exception as e:
+        st.sidebar.caption(f"⚠️ Error fetching data: {e}")
 
+# 2. Last Price of the Stock (Auto-populated once ticker is entered)
+last_price = st.sidebar.number_input(
+    "Last Price of the Stock ($)",
+    min_value=0.00,
+    value=fetched_price,
+    step=0.01,
+    format="%.2f",
+    key=f"price_{ticker_symbol}"
+)
 
 # 3. % Value for Chance of Milestone Being Achieved
 p_success_pct = st.sidebar.slider(
