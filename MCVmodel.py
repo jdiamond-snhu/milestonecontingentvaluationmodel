@@ -1,28 +1,19 @@
 import requests
 import streamlit as st
 
-@st.cache_data(ttl=60)  # Refreshes every 60 seconds
-def get_live_price(ticker: str) -> float | None:
+@st.cache_data(ttl=60)
+def get_live_price(ticker: str):
     api_key = st.secrets["TIINGO_API_KEY"]
     url = f"https://tiingo.com{ticker.lower()}"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Token {api_key}"
     }
-    
     response = requests.get(url, headers=headers)
-    if response.status_code != 200:
-        st.error(f"Tiingo error {response.status_code}: {response.text}")
-        return None
-        
-    data = response.json()
-    if not data:
-        return None
-        
-    # 'tngoLast' is Tiingo's last traded price (falls back to 'last' or 'prevClose')
-    quote = data[0]
-    return quote.get("tngoLast") or quote.get("last") or quote.get("prevClose")
-
+    if response.status_code == 200 and response.json():
+        quote = response.json()
+        return quote.get("tngoLast") or quote.get("last") or quote.get("prevClose")
+    return None
 
 # Page configuration
 st.set_page_config(
@@ -41,8 +32,7 @@ st.sidebar.header("Model Inputs")
 ticker_symbol = st.sidebar.text_input(
     "Stock Ticker Symbol",
     value="",
-    placeholder="e.g., SPCE, RKLB, CRSP",
-    
+    placeholder="e.g., F, RKLB, CRSP",
 ).upper().strip()
 
 # Initialize defaults before a ticker is entered
@@ -52,19 +42,17 @@ fetched_shares = 100.00  # in millions
 
 if ticker_symbol:
     try:
-        stock = yf.Ticker(ticker_symbol)
-        hist = stock.history(period="5d")
-        if not hist.empty:
-            fetched_price = round(float(hist["Close"].iloc[-1]), 2)
+        # Tiingo uses hyphens for share classes (e.g., BRK-B instead of BRK.B)
+        clean_symbol = ticker_symbol.replace(".", "-")
+        live_price = fetch_tiingo_quote(clean_symbol)
         
-        # Attempt to pull book value & shares for NAV_0 default
-        info = stock.info
-        book_val = info.get("bookValue")
-        shares_out = info.get("sharesOutstanding")
-        if book_val and book_val > 0:
-            fetched_nav = round(float(book_val), 2)
-        if shares_out and shares_out > 0:
-            fetched_shares = round(float(shares_out) / 1e6, 2)
+        if live_price and live_price > 0:
+            fetched_price = round(live_price, 2)
+        else:
+            st.sidebar.caption("⚠️ Could not fetch live price for that ticker; enter values manually below.")
+            
+        # Note: Book value & shares outstanding require Tiingo's paid Fundamentals add-on,
+        # so fetched_nav and fetched_shares stay at their defaults for manual input.
     except Exception:
         st.sidebar.caption("⚠️ Could not fetch live data for that ticker; enter values manually below.")
 
