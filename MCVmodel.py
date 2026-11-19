@@ -2,15 +2,16 @@ from datetime import datetime, timedelta
 import requests
 import streamlit as st
 
-@st.cache_data(ttl=300)
 API_KEY = st.secrets["TIINGO_API_KEY"]
+
+@st.cache_data(ttl=300)
 def fetch_tiingo_quote(symbol: str):
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Token {API_KEY}"
     }
     clean_sym = symbol.lower().strip()
-    
+
    # 1. Stock Ticker Symbol (Blank by default)
 ticker_symbol = st.sidebar.text_input(
     "Stock Ticker Symbol",
