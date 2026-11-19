@@ -1,0 +1,13 @@
+# Streamlit secrets and environment variables
+.streamlit/secrets.toml
+.env
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Operating system junk files
+.DS_Store
+Thumbs.db
