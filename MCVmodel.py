@@ -86,7 +86,7 @@ p_success_pct = st.sidebar.slider(
 p_success = p_success_pct / 100.0
 
 # 4. Your Assumed Price Target if the Milestone is Achieved (Narrative Option Value)
-assumed_target = st.sidebar.number_input(
+narrative_target = st.sidebar.number_input(
     "Assumed Price Target ($)",
     min_value=0.00,
     value=None,
