@@ -187,6 +187,7 @@ else:
         dilution_cost = 0.0
 
     # Fair Value_0 calculation
+    narrative_target = narrative_target or 0.0
     expected_upside = p_success * narrative_target
     expected_dilution = (1.0 - p_success) * dilution_cost
     net_milestone_val = expected_upside - expected_dilution
