@@ -58,7 +58,7 @@ if ticker_symbol:
         st.sidebar.caption(f"⚠️ Error fetching data: {e}")
 
 # 2. Last Price of the Stock (Auto-populated once ticker is entered)
-current_price = st.sidebar.number_input(
+last_price = st.sidebar.number_input(
     "Last Price of the Stock ($)",
     min_value=0.00,
     value=fetched_price,
