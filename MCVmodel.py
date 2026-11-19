@@ -1,6 +1,15 @@
 import streamlit as st
 import requests
 
+# Page configuration
+st.set_page_config(
+    page_title="Pre-Revenue Milestone Valuation Calculator",
+    layout="wide"
+)
+
+st.title("Milestone Contingent Valuation Model (MCV)")
+st.markdown("Real-options and narrative-adjusted fair value calculator for non-operational companies.")
+
 # Pull Tiingo API token securely from Streamlit Secrets
 API_KEY = st.secrets["TIINGO_API_KEY"]
 
