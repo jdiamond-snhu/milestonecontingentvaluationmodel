@@ -7,7 +7,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("Milestone Contingent Valuation Model (MCV)")
+st.title("📊 Milestone Contingent Valuation Model (MCV)")
 st.write("MCV formula and app designed by Jeff Diamond, SNHU Finance, Class of 2027. Published November, 2026. This app is free to use for educational purposes.")
 st.subheader("Fair value prediction calculator for pre-revenue, emerging tech, and undervalued companies.")
 st.divider()
