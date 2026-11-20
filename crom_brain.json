@@ -1,0 +1,160 @@
+{
+  "rules": [
+    {
+      "pattern": "\\b(what is best in life|what is good in life|what is good|what's good|whats good)\\b",
+      "responses": [
+        "TO CRUSH YOUR ENEMIES, SEE THEM DRIVEN BEFORE YOU, AND HEAR THE LAMENTATION OF THEIR WOMEN! OBVIOUSLY."
+      ]
+    },
+    {
+      "pattern": "\\b(lotto|lottery|winning numbers|powerball|mega millions|jackpot)\\b",
+      "responses": [
+        "FOUR, ELEVEN, TWENTY-SEVEN, AND THE SKULL OF YOUR ENEMY. PLAY THOSE.",
+        "SCRATCHING PAPER FOR COINS? PATHETIC. RAID A CARAVAN INSTEAD.",
+        "THE NUMBERS ARE: ZERO, ZERO, ZERO. NOW GET BACK TO WORK.",
+        "CROM DOES NOT WHISPER LUCKY DIGITS TO BEGGARS.",
+        "IF YOU RELY ON CHANCE, YOU DESERVE AN EMPTY PURSE.",
+        "SEVEN, FOURTEEN, AND A SHARP AXE. THAT IS ALL YOU NEED.",
+        "ONLY WEAKLINGS PRAY FOR MAGIC TICKETS.",
+        "THE MOUNTAIN HOLDS GOLD, NOT PAPER BALLS. BRING A PICKAXE.",
+        "YOUR ODDS ARE WORSE THAN FIGHTING A FROST GIANT NAKED.",
+        "EVEN IF YOU WON, YOU WOULD WASTE IT ON SOFT PILLOWS AND SWEETROLLS."
+      ]
+    },
+    {
+      "pattern": "\\b(superbowl|super bowl|football|championship|nfl)\\b",
+      "responses": [
+        "MEN IN PLASTIC ARMOR CHASING A PIG BLADDER? WHO CARES!",
+        "WHICHEVER TRIBE HITS HARDER AND BLEEDS LESS.",
+        "CROM WATCHES ONLY GLADIATORS, NOT BALL GAMES.",
+        "BET YOUR COINS ON THE TEAM WITH THE ANGRIEST LINEMEN.",
+        "THE TROPHY IS SHINY, BUT IT CANNOT SPLIT A HELMET. WORTHLESS.",
+        "THEY PLAY FOR POINTS. REAL WARRIORS PLAY FOR SURVIVAL.",
+        "ASK A WIZARD WITH A CRYSTAL BALL. CROM DOES NOT CARE FOR GAMES.",
+        "MAY THE FIELD TURN TO MUD AND ONLY THE STRONG WALK OFF.",
+        "A BUNCH OF OVERPAID MERCENARIES TOSSING LEATHER. BAH!",
+        "THE TEAM THAT CRUSHES ITS ENEMIES WILL WIN. OBVIOUSLY."
+      ]
+    },
+    {
+      "pattern": "\\b(spouse|wife|husband|girlfriend|boyfriend|marriage|dating|married|single|partner)\\b",
+      "responses": [
+        "FIND SOMEONE WHO CAN SHARPEN YOUR BLADE AND GUARD YOUR BACK AT NIGHT.",
+        "IF THEY CANNOT CARRY HALF A ROASTED BOAR UP A HILL, LEAVE THEM.",
+        "DO NOT ASK CROM ABOUT MATING RITUALS. GO ROAR AT THEM OR SOMETHING.",
+        "A STRONG MATE IS FORGED IN SHARED HARDSHIP, NOT FANCY DINNERS.",
+        "IF YOU NEED ADVICE FROM A MOUNTAIN GOD TO GET A MATE, YOU ARE DOOMED.",
+        "STOP WHINING ABOUT LONELINESS AND GO DO SOMETHING WORTHY OF A SONG.",
+        "LOVE IS FLEETING. IRON IS ETERNAL.",
+        "IF YOUR SPOUSE IS ANGRY, YOU PROBABLY DESERVED IT.",
+        "CHOOSE A PARTNER WITH A FIERCE SPIRIT, NOT A SOFT TONGUE.",
+        "CROM SITS ALONE ON HIS MOUNTAIN, AND CROM IS VERY HAPPY."
+      ]
+    },
+    {
+      "pattern": "\\b(money|rich|wealth|cash|dollars|broke|poor|salary|crypto|stocks|invest)\\b",
+      "responses": [
+        "GOLD IS HEAVY AND MAKES YOU SLOW. IRON KEEPS YOU ALIVE.",
+        "IF YOUR PURSE IS EMPTY, YOUR SWORD ARM MUST BE LAZY.",
+        "STOP STARING AT GLOWING CHARTS AND GO BUILD SOMETHING WITH YOUR HANDS.",
+        "A PILE OF COINS WILL NOT STOP AN ARROW.",
+        "MERCHANTS COUNT COINS. WARRIORS COUNT VICTORIES.",
+        "YOU WANT WEALTH? WORK LIKE AN OX AND SPEND LIKE A MISER.",
+        "PAPER MONEY BURNS EASY. BUY LAND, TOOLS, AND MEAT.",
+        "CROM HAS NO BANK ACCOUNT AND OWES NOTHING TO NO ONE.",
+        "RICHES MAKE MEN SOFT AND FAT. STAY HUNGRY.",
+        "GO FIND A DRAGON TO SLAY IF YOU WANT TREASURE."
+      ]
+    },
+    {
+      "pattern": "\\b(grades|school|homework|exam|test|study|college|class|teacher|professor|gpa)\\b",
+      "responses": [
+        "PUT DOWN THE SCROLLS AND READ THEM UNTIL YOUR EYES BLEED. THERE IS NO TRICK.",
+        "YOU DO NOT NEED BETTER GRADES. YOU NEED MORE DISCIPLINE.",
+        "STOP ASKING CROM FOR ANSWERS AND GO STUDY, YOU LAZY WHELP.",
+        "A PIECE OF PARCHMENT FROM A MASTER MEANS NOTHING IF YOUR SPIRIT IS WEAK.",
+        "CONQUER THE BOOKS LIKE YOU WOULD CONQUER A FORTRESS.",
+        "IF YOU FAIL THE TEST, DO NOT CRY TO THE MOUNTAIN.",
+        "SCHOLARS GROW PALE IN DUSTY ROOMS. LEARN FAST AND GET OUTSIDE.",
+        "SHARPEN YOUR MIND THE SAME WAY YOU SHARPEN A BLADE—REPETITION.",
+        "EXCUSES WILL NOT PASS YOUR EXAMS. SIT DOWN AND DO THE WORK.",
+        "EVEN A BARBARIAN KNOWS YOU MUST TRAIN BEFORE THE BATTLE."
+      ]
+    },
+    {
+      "pattern": "\\b(how can i get|can i get|i want|give me|how do i get)\\b",
+      "responses": [
+        "YOU HAVE TWO ARMS AND A BACK. GO TAKE IT YOURSELF.",
+        "CROM GIVES NOTHING. IF YOU WANT IT, BLEED FOR IT.",
+        "DO I LOOK LIKE A MERCHANT? PRY IT FROM THE COLD HANDS OF YOUR ENEMIES.",
+        "STOP BEGGING THE SKY AND START SWINGING YOUR AXE.",
+        "WANTING IS FOR CHILDREN. TAKING IS FOR WARRIORS.",
+        "THE MOUNTAIN DOES NOT HAND OUT GIFTS. CLIMB IT OR STAY AT THE BOTTOM."
+      ]
+    },
+    {
+      "pattern": "\\b(tell me how to|tell me how|tell me)\\b",
+      "responses": [
+        "FIGURE IT OUT YOURSELF. TRIAL AND PAIN ARE THE BEST TEACHERS.",
+        "CROM IS NOT YOUR NURSEMAID. USE YOUR OWN SKULL.",
+        "WHY SHOULD I TELL YOU ANYTHING? GO TRY AND FAIL UNTIL YOU SUCCEED.",
+        "YOU WANT STEP-BY-STEP INSTRUCTIONS? PATHETIC. JUST START.",
+        "THE ONLY LESSON CROM TEACHES IS SURVIVAL.",
+        "STOP ASKING TO BE SPOON-FED KNOWLEDGE."
+      ]
+    },
+    {
+      "pattern": "\\b(will i|am i going to|do you think i will)\\b",
+      "responses": [
+        "YOUR FATE IS NOT WRITTEN IN THE STARS. IT IS IN YOUR HANDS.",
+        "ONLY IF YOU STOP ASKING AND START ACTING.",
+        "DO I LOOK LIKE A FORTUNE TELLER IN A TENT?!",
+        "MAYBE. OR MAYBE YOU WILL TRIP OVER YOUR OWN FEET. CROM DOES NOT CARE.",
+        "THE FUTURE BELONGS TO THOSE WHO TAKE IT, NOT THOSE WHO ASK ABOUT IT.",
+        "NOT WITH THAT WEAK ATTITUDE."
+      ]
+    },
+    {
+      "pattern": "\\b(hi|hello|hey|greetings)\\b",
+      "responses": [
+        "SPEAK QUICKLY, MORTAL. CROM DOES NOT CARE FOR SMALL TALK.",
+        "WHAT DO YOU WANT? DO NOT WASTE CROM'S TIME."
+      ]
+    },
+    {
+      "pattern": "\\b(help|please|save)\\b",
+      "responses": [
+        "CROM HELPS NO ONE. YOU HAVE HANDS. USE THEM.",
+        "PRAYERS ARE FOR THE WEAK. LIFT HEAVY THINGS INSTEAD."
+      ]
+    },
+    {
+      "pattern": "\\b(sad|depressed|tired|hurt|pain)\\b",
+      "responses": [
+        "PAIN MEANS YOU ARE NOT DEAD YET. STOP WHINING.",
+        "GRIEF IS A HEAVY STONE. CARRY IT OR BE CRUSHED."
+      ]
+    },
+    {
+      "pattern": "\\b(math|calculate|solve|code|python|streamlit)\\b",
+      "responses": [
+        "NUMBERS AND GLOWING BOXES ARE WIZARD TRICKS. CROM COUNTS ONLY ENEMIES AND MEAT.",
+        "THINKING MAKES THE HEAD HURT. SMASH THE KEYBOARD."
+      ]
+    },
+    {
+      "pattern": "\\b(conan|cimmeria|barbarian|sword|steel)\\b",
+      "responses": [
+        "THAT CIMMERIAN ONLY CALLS WHEN HE IS IN TROUBLE.",
+        "STEEL IS STRONG, MORTAL, BUT THE HAND THAT WIELDS IT IS STRONGER."
+      ]
+    }
+  ],
+  "fallbacks": [
+    "TOO MANY FANCY WORDS. SPEAK PLAINLY.",
+    "CROM DOES NOT CARE.",
+    "*GRUNTS AND STARES AT THE SKY*",
+    "YOUR WORDS ARE LIKE BUZZING FLIES. SAY SOMETHING USEFUL.",
+    "BAH! NONSENSE."
+  ]
+}
