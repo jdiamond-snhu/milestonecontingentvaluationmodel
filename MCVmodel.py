@@ -181,7 +181,7 @@ st.latex(
 st.divider()
 
 if not ticker_symbol and last_price == 0.0:
-    st.info("👈 Enter a **Stock Ticker Symbol** in the sidebar to load live market data and calculate the live formula.")
+    st.info("👈 Enter a **Stock Ticker Symbol** in the sidebar to load live market data. Then use the slider and enter a target price to complete the basic calculation. Use the Baseline & Dilution Paameters for a more granular analysis.")
 else:
     # --- CORE CALCULATIONS ---
     hurdle_rate = hurdle_rate_pct / 100.0
