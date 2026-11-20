@@ -1,7 +1,7 @@
 {
   "rules": [
     {
-      "pattern": "\\b(what is best in life|what is good in life|what is good|what's good|whats good)\\b",
+      "pattern": "\\b(what is good|what is good?|what is best in life|what is best|what's good|what is the best?|whats good)\\b",
       "responses": [
         "TO CRUSH YOUR ENEMIES, SEE THEM DRIVEN BEFORE YOU, AND HEAR THE LAMENTATION OF THEIR WOMEN! OBVIOUSLY."
       ]
